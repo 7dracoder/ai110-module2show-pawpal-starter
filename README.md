@@ -44,51 +44,60 @@ pip install -r requirements.txt
 
 ## 🖥️ Sample Output
 
-Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
+This is the output from running `python main.py`:
 
 ```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
+Care Schedule
+-------------
+2026-07-05 07:30 | Luna | Breakfast (10 min, high, open)
+2026-07-05 08:00 | Mochi | Morning walk (30 min, high, done)
+2026-07-05 08:00 | Luna | Medication (5 min, high, open)
+2026-07-05 18:30 | Mochi | Brush coat (15 min, low, open)
+2026-07-06 08:00 | Mochi | Morning walk (30 min, high, open)
+
+Conflict Warnings
+-----------------
+- 2026-07-05 at 08:00: Mochi's Morning walk conflicts with Luna's Medication.
 ```
 
 ## 🧪 Testing PawPal+
 
 ```bash
-# Run the full test suite:
-pytest
-
-# Run with coverage:
-pytest --cov
+python -m pytest
 ```
 
-Sample test output:
+The tests cover task completion, adding tasks to pets, sorting, recurring daily tasks, and conflict detection.
 
 ```
-# Paste your pytest output here
+============================= test session starts =============================
+platform win32 -- Python 3.11.1, pytest-9.1.1, pluggy-1.6.0
+rootdir: D:\ai110-module2show-pawpal-starter
+plugins: anyio-4.14.0
+collected 5 items
+
+tests\test_pawpal.py .....                                               [100%]
+
+============================== 5 passed in 0.04s ==============================
 ```
+
+Confidence level: 4/5. The main behaviors work, but I would still add more edge case tests for bad time input and duplicate pet names.
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
-
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting | `Scheduler.sort_by_time()`, `Scheduler.sort_by_priority()` | Sorts by date/time or by priority first. |
+| Filtering | `Scheduler.filter_tasks()` | Can filter by pet name or completion status. |
+| Conflict handling | `Scheduler.detect_conflicts()` | Flags exact date/time matches as warnings. |
+| Recurring tasks | `Task.next_occurrence()`, `Scheduler.mark_task_complete()` | Daily tasks move forward 1 day and weekly tasks move forward 7 days. |
 
 ## 📸 Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
+1. Enter the owner name at the top of the app.
+2. Add one or more pets with a name and species.
+3. Add tasks for each pet with a time, duration, priority, and repeat setting.
+4. Review the schedule table. It shows the pet, task, date, time, priority, repeat setting, and completion status.
+5. If two tasks land on the same date and time, the app shows a warning.
+6. Mark an open task complete. If it is daily or weekly, the next task is created automatically.
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+The Streamlit UI uses the same classes as the command line demo, so the displayed schedule is coming from the real backend logic in `pawpal_system.py`.

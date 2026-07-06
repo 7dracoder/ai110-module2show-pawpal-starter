@@ -4,13 +4,11 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+My first design used four main classes: `Owner`, `Pet`, `Task`, and `Scheduler`. `Owner` stores the pet list, `Pet` stores tasks, `Task` stores the details of one care activity, and `Scheduler` handles sorting, filtering, conflicts, and completion.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+I added recurrence fields to `Task` after starting the scheduler logic. At first a task was only a title and time, but daily and weekly tasks needed a due date and frequency so the system could create the next task after completion.
 
 ---
 
@@ -18,13 +16,11 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+The scheduler considers date, time, priority, pet name, and completion status. I treated time and priority as the most important because a pet owner mainly needs to know what should happen first and what matters most.
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+The conflict checker only looks for exact date and time matches. It does not calculate overlapping durations. That is reasonable for this version because it keeps the logic easy to understand and still catches the most obvious scheduling problem.
 
 ---
 
@@ -32,13 +28,11 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used AI for planning the class structure, writing the first version of the scheduler, and checking the tests. The most helpful prompts were specific ones like asking how the scheduler should collect tasks from the owner and how to test recurrence.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+I did not keep the sorting exactly as first written because sorting only by clock time made tomorrow's recurring task appear before later tasks from today. I changed it to sort by date and then time, then verified it with the CLI output and tests.
 
 ---
 
@@ -46,13 +40,11 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I tested task completion, adding tasks, sorting by time, daily recurrence, and conflict detection. These tests matter because they cover the main things the app promises to do.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+I am about 4 out of 5 confident. The core behavior works, but I would add more tests for duplicate pet names, invalid task times, and larger schedules.
 
 ---
 
@@ -60,12 +52,12 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+I am most satisfied with the simple connection between the backend classes and Streamlit. The app is not fancy, but adding pets and tasks actually uses the same logic as the demo and tests.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+I would improve conflict detection so it can notice overlapping durations, not just exact time matches. I would also add saving to a JSON file so the app remembers data after closing.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+My main takeaway is that AI is useful for moving faster, but I still need to act like the architect. The design only stayed clean when I checked each suggestion against what the project actually needed.

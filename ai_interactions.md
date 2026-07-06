@@ -10,15 +10,15 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+I asked the agent to complete the PawPal+ starter project inside this repo only, keeping the code and writing simple.
 
 **What did the agent do?**
 
-<!-- List the steps the agent took (files edited, commands run, etc.) -->
+It added the backend classes in `pawpal_system.py`, created a CLI demo in `main.py`, connected the Streamlit app to the backend, added tests, updated the UML diagram, and filled in the README and reflection.
 
 **What did you have to verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
+I checked the CLI output and tests. One sorting issue came up with recurring tasks, so the scheduler was adjusted to sort by date first and then time.
 
 ---
 
